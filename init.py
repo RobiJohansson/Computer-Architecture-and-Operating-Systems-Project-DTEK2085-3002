@@ -6,7 +6,7 @@ from multiprocessing import Process, Pipe, shared_memory
 
 def child_process(conn):
     """Child process generates a random priority and writes it to the pipe."""
-    priority = random.randint(0, 19)  # Generate random integer between 0-19
+    priority = random.randint(0, 19)
     # priority = 5
     print(f"Child process {os.getpid()} generated priority: {priority}")
     conn.send(priority)  # Write the priority to the pipe
