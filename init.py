@@ -7,6 +7,7 @@ from multiprocessing import Process, Pipe, shared_memory
 def child_process(conn):
     """Child process generates a random priority and writes it to the pipe."""
     priority = random.randint(0, 19)  # Generate random integer between 0-19
+    # priority = 5
     print(f"Child process {os.getpid()} generated priority: {priority}")
     conn.send(priority)  # Write the priority to the pipe
     conn.close()  # Close the connection
@@ -21,7 +22,7 @@ def init_process():
 
     # Create 4 child processes
     for i in range(4):
-        process = Process(target=child_process, args=(connections[i][1],))  # Create a new child process
+        process = Process(target=child_process, args=(connections[i][1],))  # Create a new child process (fork)
         processes.append(process)
         process.start()  # Start the child process
         connections[i][1].close()  # Close the write end of the pipe in the parent
