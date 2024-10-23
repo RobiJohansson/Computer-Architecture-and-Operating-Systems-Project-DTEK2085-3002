@@ -31,8 +31,7 @@ def init_process():
     # Parent process reads the priorities from the pipes
     for i in range(4):
         priority = connections[i][0].recv()  # Read from pipe
-        if priority:
-            priorities.append(priority)  # Append priority to list
+        priorities.append(priority)  # Append priority to list
         connections[i][0].close()  # Close the read end of the pipe after reading
 
     print(f"Priorities received from P1-P4: {priorities}")
